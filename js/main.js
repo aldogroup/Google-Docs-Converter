@@ -29,9 +29,7 @@
 	    });
 
 	    request.done(function (response, textStatus, jqXHR) {
-	        // log a message to the console
-	        console.log("Hooray, it worked!");
-
+	    	
 	        $form.hide();
 
 	        $response.slideDown('fast', function() {
