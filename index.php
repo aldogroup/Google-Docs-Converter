@@ -65,7 +65,7 @@
 
 			        $form.hide();
 
-			        $response.fadeIn('fast', function() {
+			        $response.slideDown('fast', function() {
 			        	$(this).html(response);
 			        });
 
