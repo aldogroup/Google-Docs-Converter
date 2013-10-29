@@ -33,7 +33,7 @@
 	        $form.hide();
 
 	        $response.slideDown('fast', function() {
-	        	$(this).html(response);
+	        	$(this).html(response).select();
 	        });
 
 	        $('.restart').show().on('click', function(e) {
