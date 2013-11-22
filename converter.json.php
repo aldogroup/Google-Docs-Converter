@@ -1,5 +1,5 @@
 <?php
- 
+
 /**
  * Converts the CSV output from Google Docs to an array
  * we can work with.
@@ -9,19 +9,19 @@
  *
  * @return $arr CSV converted array
  */
-function csvToArray($file, $delimiter) { 
-  if (($handle = fopen($file, 'r')) !== FALSE) { 
-    $i = 0; 
+function csvToArray($file, $delimiter) {
+  if (($handle = fopen($file, 'r')) !== FALSE) {
+    $i = 0;
     while (($lineArray = fgetcsv($handle, 4000, $delimiter, '"')) !== FALSE) {
-      for ($j = 0; $j < count($lineArray); $j++) { 
-        $arr[$i][$j] = $lineArray[$j]; 
-      } 
-      $i++; 
-    } 
-    fclose($handle); 
-  } 
-  return $arr; 
-} 
+      for ($j = 0; $j < count($lineArray); $j++) {
+        $arr[$i][$j] = $lineArray[$j];
+      }
+      $i++;
+    }
+    fclose($handle);
+  }
+  return $arr;
+}
 
 /**
  * Encodes an array to JSON format - in this case
@@ -37,24 +37,24 @@ function encodeArraytoJSON($feed = '') {
 
   $data = csvToArray($feed, ',');
   $count = count($data) - 1;
-  $labels = array_shift($data);  
-   
+  $labels = array_shift($data);
+
   foreach ($labels as $label) {
     $keys[] = $label;
   }
 
   $keys[] = 'id';
-   
+
   for ($i = 0; $i < $count; $i++) {
     $data[$i][] = $i;
   }
-   
+
   for ($j = 0; $j < $count; $j++) {
     $d = array_combine($keys, $data[$j]);
     $newArray[$j] = $d;
   }
 
-  echo json_encode($newArray);
+  echo json_encode($newArray, JSON_UNESCAPED_UNICODE);
 }
 
 if ( $_POST['key'] == '' ) {
